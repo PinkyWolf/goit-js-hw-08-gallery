@@ -41,8 +41,9 @@ function onGalleryClick(e) {
   }
   if (e.target.nodeName === "IMG") {
     lightbox.classList.add("is-open");
-    lightbox__image.src = e.target.getAttribute("data-source");
-    lightbox__image.alt = e.target.alt;
+    const targetSrc = e.target.getAttribute("data-source")
+    const targetAlt = e.target.alt
+    changeLightboxImg(targetSrc,targetAlt );
   }
   window.addEventListener("keyup", clickKey);
 }
@@ -50,9 +51,13 @@ function onGalleryClick(e) {
 function onClickHandlerClose(e) {
   e.preventDefault(); 
   lightbox.classList.remove("is-open");
-  lightbox__image.src = '';
-  lightbox__image.alt = '';
+  changeLightboxImg('', '');
   window.removeEventListener("keyup", clickKey);
+}
+
+function changeLightboxImg(src, alt) {
+  lightbox__image.src = src;
+  lightbox__image.alt = alt;
 }
 
 function closeLightbox(event) {
